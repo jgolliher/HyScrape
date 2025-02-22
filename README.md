@@ -1,37 +1,37 @@
-# <center>HyScrape</center>
-## <center>Scraping Web-Based Swim Results</center>
-#### <center>John Golliher</center>
-
+# HyScrape
+## Scraping HyTek Web-Based Swim Results
 ********
 
 ## Overview
 
-Almost all swim meets are managed and run in HyTek's **Meet Manager**, which utilizes several tools to share results. One of these is *web-based results* which posts the results in an HTML format to a link specified by the Meet Manager operator. The purpose of **HyScrape** is to scrape these results and format them in a tabular format. 
+Almost all swim meets are managed using HyTek's **Meet Manager**, which optionally publishes web-based results during the swim meet. Result files are stored in HTML. The purpose of **HyScrape** is to scrape these results into a tabular format.
 
 ********
 
-## Current Status
+## Status
 
-Currently, this is in the *preliminary* phase. I have a lot of code written, but it has not been tested to ensure full compatability. I started writing this code in **R** as it is the language I am most familiar with. My plan is to finish it in **R** and then move into **Python** as both a feature and a challenge to myself to code something in **Python.**
+This project is in a preliminary phase and has only been tested on collegiate meets. I have a lot of Python code written to scrape the results, but formatting is the primary challenge. Right now the code can scan a specified URL for HyTek results and list all events and their event-specific URL. The formats vary based on a few criteria:
 
-********
-
-## Project Goals
-
-1. Develop code to scrape web-based swim results
-2. Develop code to output these results into a tabular format
-3. Create an applet which enables users with no prior coding experience to scrape web-based swim results
-4. Share the project and code so anyone can use it
+* **Round:** Slight variation between Psych, Prelims, and Finals 
+* **Event:** Variation between individual swims, diving, and relays
 
 ********
 
-## About the Author
+## Project Notes
 
-Why not include this section? I think it's fun!
+A large challenge of this project is formatting the result lines. It's fairly easy to *find* the result lines within a HTML page (`re.search(pattern="^\s*\d{1,3}\s.*", string=row)` where `row` is a line in the results/psych page) can consistently find a line representing a swimmer. Great. The hard part is then *formatting* said line into tabular data. There are a few variations these lines can take, such as:
 
-My name is John Golliher. I am currently studying to get my Master of Science in Business Analytics at the University of Tennessee, Knoxville. I also received my Bachelor's Degree in Business Administration, majoring in Business Analytics, from the Haslam College of Business at UTK. 
+<pre>
+`1 FLOR-FL  'A'                        1:34.18    1:34.25   64  `
+</pre>
 
-On top of all of that, I am also a manager for Tennessee Swimmming and Diving; a position I have held since my sophomore year of undergrad. This project was born out of my goals as a manager and my love for data. 
+* **1**: Place
+* **FLOR-FL**: Team name
+* **'A'**: Relay team
+* **1:34.18**: Seed time
+* **1:34.25**: Time
+* **64**: Points
 
-I'm not sure if anyone else will find this useful, but I have an opinion that data and non-sensitive information should be open source. 
+********
+
 
